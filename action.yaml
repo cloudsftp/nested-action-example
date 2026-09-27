@@ -1,0 +1,19 @@
+name: "Hello World Wrapper"
+description: "Call the nested action"
+runs:
+  using: "composite"
+  steps:
+    - name: Print current directory and list contents
+      shell: bash
+      run: |
+        set -ex
+
+        pwd
+        ls -la .
+
+    - uses: $/nested
+      with:
+        who-to-greet: "Clouds"
+    - name: Get the output time
+      shell: bash
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
